@@ -1,9 +1,7 @@
-<h2>Directive Example</h2>
-
-<p>The most simple directive</p>
+<h2>1. The most simple directive</h2>
 
 <h4>Define a Directive:</h4>
-<pre><code>.directive('simpleDirective', function(){
+<pre><code>.directive('simpleDirectiveOne', function(){
   return {
     restrict: "E",
     template: "<span>Simple directive</span>"
@@ -12,7 +10,52 @@
 </code></pre>
 
 <h4>Use it:</h4>
-<pre><code>&lt;simple-directive&gt;&lt;/simple-directive></code></pre>
+<pre><code>&lt;simple-directive-one&gt;&lt;/simple-directive-one></code></pre>
 
 <h4>Result:</h4>
-<simple-directive></simple-directive>
+<simple-directive-one></simple-directive-one>
+
+
+<h2>2. Directive updates on changes in parent scope</h2>
+
+<h4>Define setter functions in the parent scope:</h4>
+<pre><code>.controller( 'ExamplesCtrl', function ExamplesCtrl( $scope ) {
+  $scope.resetItems2 = function() {
+    $scope.items = [];
+  };
+  $scope.setItems2 = function() {
+    $scope.items = [
+      "First item",
+      "Second item",
+      "Third item"
+    ];
+  };
+})
+</code></pre>
+
+<h4>Define the Directive:</h4>
+<pre><code ng-non-bindable>.controller( 'ExamplesCtrl', function ExamplesCtrl( $scope ) {
+.directive('simpleDirectiveTwo', function() {
+  return {
+    scope: {
+      items: '='
+    },
+    template: '&lt;div&gt;&lt;ul ng-repeat="item in items"&gt;' +
+              '&lt;li&gt;{{item}}&lt;/li&gt;' +
+              '&lt;/ul&gt;&lt;/div&gt;',
+    replace: true
+  };
+})
+</code></pre>
+
+<h4>Use it:</h4>
+<pre><code>&lt;simple-directive-two&gt;&lt;/simple-directive-two></code></pre>
+
+<h4>Result:</h4>
+
+<button ng-click="setItems2()">Set items</button>
+<button ng-click="resetItems2()">Reset items</button>
+<br>
+<br>
+<div simple-directive-two items='items'></div>
+
