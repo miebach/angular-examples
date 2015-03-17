@@ -1,0 +1,18 @@
+<h2>Directive Example</h2>
+
+<p>The most simple directive</p>
+
+<h4>Define a Directive:</h4>
+<pre><code>.directive('simpleDirective', function(){
+  return {
+    restrict: "E",
+    template: "<span>Simple directive</span>"
+  };
+})
+</code></pre>
+
+<h4>Use it:</h4>
+<pre><code>&lt;simple-directive&gt;&lt;/simple-directive></code></pre>
+
+<h4>Result:</h4>
+<simple-directive></simple-directive>
